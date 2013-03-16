@@ -18,8 +18,7 @@ from flask import Flask, request
 import re
 import shlex
 import socket
-from subprocess import check_output
-from urlparse import urlparse
+import subprocess
 
 app = Flask(__name__)
 
@@ -32,8 +31,8 @@ def icanhazafunction():
         # The request is for *.icanhaztraceroute.com
         ipregex = re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", request.remote_addr)
         if ipregex:
-            tracecmd = shlex.split('traceroute -q 1 -w 1 4.2.2.1 2 > /dev/null')
-            result = check_output(tracecmd).strip()
+            tracecmd = shlex.split("traceroute -q 1 -w 1 %s" % request.remote_addr)
+            result = subprocess.Popen(tracecmd, stdout=subprocess.PIPE).communicate()[0].strip()
         else:
             result = request.remote_addr
     else:
