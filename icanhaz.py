@@ -15,13 +15,14 @@
 #   limitations under the License.
 #
 from flask import Flask, request
+import os
 import re
 import shlex
 import socket
 import subprocess
 
 app = Flask(__name__)
-app.debug=True
+traceroute_bin = "%s/traceroute" % os.path.dirname(os.path.abspath(__file__))
 
 
 @app.route("/")
@@ -47,8 +48,8 @@ def icanhazafunction():
         except socket.error:
             pass
         if valid_ip:
-            tracecmd = shlex.split("traceroute -q 1 -w 1 %s" %
-                request.remote_addr)
+            tracecmd = shlex.split("%s -q 1 -w 1 %s" %
+                (traceroute_bin, request.remote_addr))
             result = subprocess.Popen(tracecmd,
                 stdout=subprocess.PIPE).communicate()[0].strip()
         else:
