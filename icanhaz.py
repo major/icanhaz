@@ -21,6 +21,7 @@ import socket
 import subprocess
 
 app = Flask(__name__)
+app.debug=True
 
 
 @app.route("/")
@@ -34,9 +35,18 @@ def icanhazafunction():
             result = request.remote_addr
     elif 'icanhaztrace' in request.host:
         # The request is for *.icanhaztraceroute.com
-        ipregex = re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",
-            request.remote_addr)
-        if ipregex:
+        valid_ip = False
+        try:
+            socket.inet_pton(socket.AF_INET, request.remote_addr)
+            valid_ip = True
+        except socket.error:
+            pass
+        try:
+            socket.inet_pton(socket.AF_INET6, request.remote_addr)
+            valid_ip = True
+        except socket.error:
+            pass
+        if valid_ip:
             tracecmd = shlex.split("traceroute -q 1 -w 1 %s" %
                 request.remote_addr)
             result = subprocess.Popen(tracecmd,
