@@ -28,7 +28,7 @@ def icanhazafunction():
     if 'icanhazptr' in request.host:
         # The request is for *.icanhazptr.com
         result = socket.gethostbyaddr(request.remote_addr)[0]
-    elif 'icanhaztraceroute' in request.host:
+    elif 'icanhaztrace' in request.host:
         # The request is for *.icanhaztraceroute.com
         ipregex = re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",
             request.remote_addr)
