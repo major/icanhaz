@@ -27,7 +27,11 @@ app = Flask(__name__)
 def icanhazafunction():
     if 'icanhazptr' in request.host:
         # The request is for *.icanhazptr.com
-        result = socket.gethostbyaddr(request.remote_addr)[0]
+        try:
+            output = socket.gethostbyaddr(request.remote_addr)
+            result = output[0]
+        except:
+            result = request.remote_addr
     elif 'icanhaztrace' in request.host:
         # The request is for *.icanhaztraceroute.com
         ipregex = re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",
