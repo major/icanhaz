@@ -22,8 +22,7 @@ import socket
 import subprocess
 
 app = Flask(__name__)
-traceroute_bin = "%s/traceroute" % os.path.dirname(os.path.abspath(__file__))
-
+traceroute_bin = "/bin/traceroute-suid"
 
 @app.route("/")
 def icanhazafunction():
@@ -48,7 +47,7 @@ def icanhazafunction():
         except socket.error:
             pass
         if valid_ip:
-            tracecmd = shlex.split("%s -q 1 -w 1 -n %s" %
+            tracecmd = shlex.split("%s -q 1 -f 2 -w 1 -n %s" %
                 (traceroute_bin, request.remote_addr))
             result = subprocess.Popen(tracecmd,
                 stdout=subprocess.PIPE).communicate()[0].strip()
