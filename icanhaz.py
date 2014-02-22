@@ -20,6 +20,7 @@ import re
 import shlex
 import socket
 import subprocess
+import time
 
 app = Flask(__name__)
 traceroute_bin = "/bin/traceroute-suid"
@@ -33,6 +34,9 @@ def icanhazafunction():
             result = output[0]
         except:
             result = request.remote_addr
+    elif 'icanhazepoch' in request.host:
+        epoch_time = int(time.time())
+        result = epoch_time
     elif 'icanhaztrace' in request.host:
         # The request is for *.icanhaztraceroute.com
         valid_ip = False
