@@ -1,0 +1,18 @@
+    Header set Content-Type "text/plain"
+    <Directory /var/www/html/icanhaz-app/>
+        WSGIProcessGroup icanhaz
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+
+    <Limit GET HEAD>
+        order deny,allow
+        allow from all
+    </Limit>
+
+    <Limit POST PUT DELETE>
+        order allow,deny
+        deny from all
+    </Limit>
+
+    </Directory>
