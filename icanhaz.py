@@ -15,12 +15,15 @@
 #   limitations under the License.
 #
 from flask import Flask, request
+import json
 import os
 import re
 import shlex
 import socket
 import subprocess
 import time
+from flask import Response
+
 
 app = Flask(__name__)
 traceroute_bin = "/bin/traceroute-suid"
@@ -57,10 +60,23 @@ def icanhazafunction():
                 stdout=subprocess.PIPE).communicate()[0].strip()
         else:
             result = request.remote_addr
+    elif 'icanhazproxy' in request.host:
+        proxy_headers = ['via','x-forwarded-for','forwarded','client-ip',
+            'useragent_via','proxy_connection','xproxy_connection',
+            'http_pc_remote_addr','http_client_ip','http_x_appengine_country']
+        found_headers = {}
+        for header in proxy_headers:
+            value = request.headers.get(header, None)
+            if value:
+                found_headers[header] = value.strip()
+        if len(found_headers) > 0:
+            result = json.dumps(found_headers)
+        else:
+            return Response(""), 204
     else:
         # The request is for *.icanhazip.com or something we don't recognize
         result = request.remote_addr
-    return "%s\n" % result
+    return Response("%s\n" % result, mimetype="text/plain")
 
 if __name__ == "__main__":
     app.run()
