@@ -28,6 +28,7 @@ from flask import Response
 app = Flask(__name__)
 traceroute_bin = "/bin/traceroute-suid"
 
+
 @app.route("/")
 def icanhazafunction():
     if 'icanhazptr' in request.host:
@@ -61,9 +62,10 @@ def icanhazafunction():
         else:
             result = request.remote_addr
     elif 'icanhazproxy' in request.host:
-        proxy_headers = ['via','x-forwarded-for','forwarded','client-ip',
-            'useragent_via','proxy_connection','xproxy_connection',
-            'http_pc_remote_addr','http_client_ip','http_x_appengine_country']
+        proxy_headers = ['via', 'x-forwarded-for', 'forwarded', 'client-ip',
+            'useragent_via', 'proxy_connection', 'xproxy_connection',
+            'http_pc_remote_addr', 'http_client_ip',
+            'http_x_appengine_country']
         found_headers = {}
         for header in proxy_headers:
             value = request.headers.get(header, None)
