@@ -10,6 +10,7 @@ This is some of the code behind the scenes of some goofy websites like:
 * [icanhaztrace.com](icanhaztrace.com)
 * [icanhaztraceroute.com](icanhaztraceroute.com)
 * [icanhazepoch.com](icanhazepoch.com)
+* [icanhazproxy.com](icanhazproxy.com)
 
 It's Apache 2.0 licensed and it's poorly written code. ;)
 
