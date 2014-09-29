@@ -14,7 +14,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 import json
 import os
 import re
@@ -25,7 +25,7 @@ import time
 from flask import Response
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 traceroute_bin = "/bin/traceroute-suid"
 
 
@@ -79,6 +79,13 @@ def icanhazafunction():
         # The request is for *.icanhazip.com or something we don't recognize
         result = request.remote_addr
     return Response("%s\n" % result, mimetype="text/plain")
+
+
+@app.route('/crossdomain.xml')
+@app.route('/robots.txt')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
+
 
 if __name__ == "__main__":
     app.run()
