@@ -55,8 +55,12 @@ def icanhazafunction():
         except socket.error:
             pass
         if valid_ip:
-            tracecmd = shlex.split("%s -q 1 -f 2 -w 1 -n %s" %
-                (traceroute_bin, request.remote_addr))
+            if 'icanhaztraceroute' in request.host:
+                tracecmd = shlex.split("%s -q 1 -f 2 -w 1 %s" %
+                    (traceroute_bin, request.remote_addr))
+            else:
+                tracecmd = shlex.split("%s -q 1 -f 2 -w 1 -n %s" %
+                    (traceroute_bin, request.remote_addr))
             result = subprocess.Popen(tracecmd,
                 stdout=subprocess.PIPE).communicate()[0].strip()
         else:
