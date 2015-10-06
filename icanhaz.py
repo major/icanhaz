@@ -22,7 +22,7 @@ import socket
 import subprocess
 import time
 
-from flask import Flask, request, send_from_directory
+from flask import Flask, Response, request, send_from_directory
 
 
 app = Flask(__name__, static_folder='static')
