@@ -13,16 +13,14 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-#
-from flask import Flask, request, send_from_directory
+
 import json
-import os
-import re
 import shlex
 import socket
 import subprocess
 import time
-from flask import Response
+
+from flask import Flask, Response, request, send_from_directory
 
 
 app = Flask(__name__, static_folder='static')
