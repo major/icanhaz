@@ -18,6 +18,6 @@ ADD icanhaz.py /var/www/html/icanhaz-app/icanhaz/icanhaz.py
 RUN echo "ServerTokens Prod" >> /etc/httpd/conf.d/servertokens.conf
 RUN echo "ServerName icanhazip.com" >> /etc/httpd/conf.d/servername.conf
 
-EXPOSE 80
 ENTRYPOINT ["/usr/sbin/httpd"]
+EXPOSE 80
 CMD ["-D", "FOREGROUND"]
