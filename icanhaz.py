@@ -64,7 +64,7 @@ def icanhazafunction():
         else:
             result = request.remote_addr
     elif 'icanhazproxy' in request.host:
-        proxy_headers = ['via', 'x-forwarded-for', 'forwarded', 'client-ip',
+        proxy_headers = ['via', 'forwarded', 'client-ip',
             'useragent_via', 'proxy_connection', 'xproxy_connection',
             'http_pc_remote_addr', 'http_client_ip',
             'http_x_appengine_country']
