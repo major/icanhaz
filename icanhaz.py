@@ -55,19 +55,28 @@ def icanhazafunction():
         if valid_ip:
             if 'icanhaztraceroute' in request.host:
                 tracecmd = shlex.split("%s -q 1 -f 2 -w 1 %s" %
-                    (traceroute_bin, request.remote_addr))
+                                       (traceroute_bin, request.remote_addr))
             else:
                 tracecmd = shlex.split("%s -q 1 -f 2 -w 1 -n %s" %
-                    (traceroute_bin, request.remote_addr))
-            result = subprocess.Popen(tracecmd,
-                stdout=subprocess.PIPE).communicate()[0].strip()
+                                       (traceroute_bin, request.remote_addr))
+            result = subprocess.Popen(
+                tracecmd,
+                stdout=subprocess.PIPE
+                ).communicate()[0].strip()
         else:
             result = request.remote_addr
     elif 'icanhazproxy' in request.host:
-        proxy_headers = ['via', 'forwarded', 'client-ip',
-            'useragent_via', 'proxy_connection', 'xproxy_connection',
-            'http_pc_remote_addr', 'http_client_ip',
-            'http_x_appengine_country']
+        proxy_headers = [
+            'via',
+            'forwarded',
+            'client-ip',
+            'useragent_via',
+            'proxy_connection',
+            'xproxy_connection',
+            'http_pc_remote_addr',
+            'http_client_ip',
+            'http_x_appengine_country'
+            ]
         found_headers = {}
         for header in proxy_headers:
             value = request.headers.get(header, None)
