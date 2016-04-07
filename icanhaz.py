@@ -77,6 +77,8 @@ def icanhazafunction():
             result = json.dumps(found_headers)
         else:
             return Response(""), 204
+    elif 'icanhazheaders' in request.host:
+        result = json.dumps(dict(request.headers))
     else:
         # The request is for *.icanhazip.com or something we don't recognize
         result = request.remote_addr
