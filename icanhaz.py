@@ -63,6 +63,7 @@ def icanhazafunction():
                 tracecmd,
                 stdout=subprocess.PIPE
                 ).communicate()[0].strip()
+            result = result.decode('utf-8')
         else:
             result = request.remote_addr
     elif 'icanhazproxy' in request.host:
