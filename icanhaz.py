@@ -91,7 +91,9 @@ def icanhazafunction():
         result = json.dumps(dict(request.headers))
     else:
         # The request is for *.icanhazip.com or something we don't recognize
-        result = request.remote_addr
+        # This method should pull the correct hop even with load balancers in the way
+        # https://stackoverflow.com/questions/33818540/how-to-get-the-first-client-ip-from-x-forwarded-for-behind-nginx-gunicorn
+        result = request.access_route[0]
     return Response("%s\n" % result, mimetype="text/plain", headers={'X-Your-Ip': request.remote_addr})
 
 
