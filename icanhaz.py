@@ -29,6 +29,7 @@ traceroute_bin = "/bin/traceroute-suid"
 
 @app.route("/")
 def icanhazafunction():
+    mimetype = "text/plain"
     if 'icanhazptr' in request.host:
         # The request is for *.icanhazptr.com
         try:
@@ -84,6 +85,7 @@ def icanhazafunction():
             if value:
                 found_headers[header] = value.strip()
         if len(found_headers) > 0:
+            mimetype = "application/json"
             result = json.dumps(found_headers)
         else:
             return Response(""), 204
@@ -92,7 +94,7 @@ def icanhazafunction():
     else:
         # The request is for *.icanhazip.com or something we don't recognize
         result = request.remote_addr
-    return Response("%s\n" % result, mimetype="text/plain", headers={'X-Your-Ip': request.remote_addr})
+    return Response("%s\n" % result, mimetype=mimetype, headers={"X-Your-Ip": request.remote_addr})
 
 
 @app.route('/crossdomain.xml')
