@@ -11,6 +11,7 @@ This is some of the code behind the scenes of some goofy websites like:
 * [icanhaztraceroute.com](http://icanhaztraceroute.com)
 * [icanhazepoch.com](http://icanhazepoch.com)
 * [icanhazproxy.com](http://icanhazproxy.com)
+* [icanhazheaders.com](https://icanhazheaders.com)
 
 It's Apache 2.0 licensed and it's poorly written code. ;)
 
