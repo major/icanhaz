@@ -5,12 +5,12 @@ There's no need to check this code out and run it yourself.  These services are 
 
 This is some of the code behind the scenes of some goofy websites like:
 
-* [icanhazip.com](http://icanhazip.com)
-* [icanhazptr.com](http://icanhazptr.com)
-* [icanhaztrace.com](http://icanhaztrace.com)
-* [icanhaztraceroute.com](http://icanhaztraceroute.com)
-* [icanhazepoch.com](http://icanhazepoch.com)
-* [icanhazproxy.com](http://icanhazproxy.com)
+* [icanhazip.com](https://icanhazip.com)
+* [icanhazptr.com](https://icanhazptr.com)
+* [icanhaztrace.com](https://icanhaztrace.com)
+* [icanhaztraceroute.com](https://icanhaztraceroute.com)
+* [icanhazepoch.com](https://icanhazepoch.com)
+* [icanhazproxy.com](https://icanhazproxy.com)
 * [icanhazheaders.com](https://icanhazheaders.com)
 
 It's Apache 2.0 licensed and it's poorly written code. ;)
