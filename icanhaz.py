@@ -90,6 +90,7 @@ def icanhazafunction():
         else:
             return Response(""), 204
     elif 'icanhazheaders' in request.host:
+        mimetype = "application/json"
         result = json.dumps(dict(request.headers))
     else:
         # The request is for *.icanhazip.com or something we don't recognize
