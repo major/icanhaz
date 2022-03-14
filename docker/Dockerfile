@@ -1,4 +1,4 @@
-FROM fedora:22
+FROM fedora:36
 
 RUN yum -y install httpd mod_wsgi python-flask traceroute && yum clean all
 RUN mkdir -vp /var/www/html/icanhaz-app/icanhaz/
